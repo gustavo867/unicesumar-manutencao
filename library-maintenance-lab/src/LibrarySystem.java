@@ -90,22 +90,6 @@ public class LibrarySystem {
             String shelfCode = DataUtil.ask("Shelf code: ", "X0");
             String isbn = DataUtil.ask("ISBN: ", "NO-ISBN");
 
-            if (DataUtil.isBlank(title)) {
-                throw new RuntimeException("title blank");
-            }
-            if (DataUtil.isBlank(author)) {
-                throw new RuntimeException("author blank");
-            }
-            if (year <= 0) {
-                year = 2000;
-            }
-            if (total <= 0) {
-                total = 1;
-            }
-            if (available < 0) {
-                available = total;
-            }
-
             int id = bookManager.registerBook(title, author, year, category, total, available, shelfCode, isbn);
             System.out.println("Book registered with id " + id);
 
