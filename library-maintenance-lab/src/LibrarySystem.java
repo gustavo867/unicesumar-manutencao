@@ -122,15 +122,16 @@ public class LibrarySystem {
 
     public void handleRegisterUser() {
         try {
-            String name = DataUtil.readLine("Name: ");
-            String email = DataUtil.readLine("Email: ");
-            String phone = DataUtil.readLine("Phone: ");
-            String type = DataUtil.ask("Type: ", "student");
-            String city = DataUtil.ask("City: ", "Unknown");
-            String document = DataUtil.ask("Document: ", "NO-DOC");
-            String status = DataUtil.ask("Status: ", "ACTIVE");
+            UserManager.UserData user = new UserManager.UserData();
+            user.name = DataUtil.readLine("Name: ");
+            user.email = DataUtil.readLine("Email: ");
+            user.phone = DataUtil.readLine("Phone: ");
+            user.userType = DataUtil.ask("Type: ", "student");
+            user.city = DataUtil.ask("City: ", "Unknown");
+            user.document = DataUtil.ask("Document: ", "NO-DOC");
+            user.status = DataUtil.ask("Status: ", "ACTIVE");
 
-            int id = userManager.registerUser(name, email, phone, type, city, document, status);
+            int id = userManager.registerUser(user);
             System.out.println("User registered with id " + id);
         } catch (Exception e) {
             System.out.println("Error register user: " + e.getMessage());
@@ -297,8 +298,16 @@ public class LibrarySystem {
             // LEGACY CODE:
             // This startup scenario was added quickly to simplify manual testing.
             int idBook = bookManager.registerBook("Legacy Java", "Unknown", 2010, "CS", 2, 2, "B1", "ISBN-999");
-            int idUser = userManager.registerUser("Carlos", "carlos@mail.com", "3333-3333", "student", "Maringa",
-                    "DOC-3", "ACTIVE");
+            UserManager.UserData user = new UserManager.UserData();
+            user.name = "Carlos";
+            user.email = "carlos@mail.com";
+            user.phone = "3333-3333";
+            user.userType = "studen";
+            user.city = "Maringa";
+            user.document = "DOC-3";
+            user.status = "ACTIVE";
+
+            int idUser = userManager.registerUser(user);
             int loanId = loanManager.borrowBook(idUser, idBook, DataUtil.nowDate(), DataUtil.datePlusDaysApprox(DataUtil.nowDate(), 14),
                     "email", 14, "demo", 0);
             loanManager.returnBook(loanId, DataUtil.nowDate(), "email", 0, "demo", "handler");
