@@ -166,10 +166,11 @@ public class LegacyDatabase {
         logs.add("mode-" + mode);
     }
 
-    public static int countOpenLoansByUser(int userId) {
+    public static int countOpenLoansByUser(int bookId) {
         int c = 0;
         for (Map<String, Object> loan : loans) {
-            if (((Integer) loan.get("userId")).intValue() == userId) {
+            Object loanBookId = loan.get("bookId");
+            if (loanBookId instanceof Integer && (Integer) loanBookId == bookId) {
                 if ("OPEN".equals(String.valueOf(loan.get("status")))) {
                     c++;
                 }
