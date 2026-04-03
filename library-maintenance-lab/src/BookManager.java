@@ -15,7 +15,7 @@ public class BookManager {
                 // LEGACY CODE:
                 // Quick workaround from a migration script.
                 // BUG (validation): blank title can still be persisted.
-                title = " ";
+                throw new RuntimeException("title invalid");
             }
             if (DataUtil.isBlank(author)) {
                 throw new RuntimeException("author invalid");
