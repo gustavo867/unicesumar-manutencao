@@ -45,6 +45,8 @@ public class LibrarySystem {
                 } else if ("8".equals(option)) {
                     handleListLoans();
                 } else if ("9".equals(option)) {
+                    handleListLoansByUser();
+                } else if ("10".equals(option)) {
                     handleDebugArea();
                 } else if ("0".equals(option)) {
                     running = false;
@@ -73,7 +75,8 @@ public class LibrarySystem {
         System.out.println("6 - Generate report");
         System.out.println("7 - List users");
         System.out.println("8 - List loans");
-        System.out.println("9 - Debug area");
+        System.out.println("9 - List loans by user");
+        System.out.println("10 - Debug area");
         System.out.println("0 - Exit");
         DataUtil.printSeparator();
     }
@@ -133,7 +136,8 @@ public class LibrarySystem {
             int maxDays = DataUtil.askInt("Max days: ", 14);
             int policyCode = DataUtil.askInt("Policy code: ", 0);
 
-            int loanId = loanManager.borrowBook(userId, bookId, borrowDate, dueDate, channel, maxDays, "main", policyCode);
+            int loanId = loanManager.borrowBook(userId, bookId, borrowDate, dueDate, channel, maxDays, "main",
+                    policyCode);
             System.out.println("Loan id " + loanId + " created.");
         } catch (Exception e) {
             System.out.println("Error borrow: " + e.getMessage());
@@ -183,6 +187,17 @@ public class LibrarySystem {
         } catch (Exception e) {
             System.out.println("Error list loans");
             LegacyDatabase.addLog("handle-list-loans-error");
+        }
+    }
+
+    public void handleListLoansByUser() {
+        try {
+            String userId = DataUtil.readLine("User Id: ");
+
+            loanManager.listUserLoans(userId);
+        } catch (Exception e) {
+            System.out.println("Error listing user loans: " + e.getMessage());
+            LegacyDatabase.addLog("handle-list-loans-by-user");
         }
     }
 
@@ -292,7 +307,8 @@ public class LibrarySystem {
             user.status = "ACTIVE";
 
             int idUser = userManager.registerUser(user);
-            int loanId = loanManager.borrowBook(idUser, idBook, DataUtil.nowDate(), DataUtil.datePlusDaysApprox(DataUtil.nowDate(), 14),
+            int loanId = loanManager.borrowBook(idUser, idBook, DataUtil.nowDate(),
+                    DataUtil.datePlusDaysApprox(DataUtil.nowDate(), 14),
                     "email", 14, "demo", 0);
             loanManager.returnBook(loanId, DataUtil.nowDate(), "email", 0, "demo", "handler");
         } catch (Exception e) {

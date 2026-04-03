@@ -25,28 +25,32 @@ public class LoanManager {
                         if (((Double) user.get("debt")).doubleValue() <= 100.0) {
                             if (((Integer) book.get("availableCopies")).intValue() > 0) {
                                 if (LegacyDatabase.countOpenLoansByUser(userId) < 5) {
-                                    if (LegacyDatabase.countOpenLoansByBook(bookId) < ((Integer) book.get("totalCopies")).intValue()) {
+                                    if (LegacyDatabase.countOpenLoansByBook(
+                                            bookId) < ((Integer) book.get("totalCopies")).intValue()) {
                                         if (DataUtil.isBlank(borrowDate)) {
                                             borrowDate = DataUtil.nowDate();
                                         }
                                         if (DataUtil.isBlank(dueDate)) {
                                             dueDate = DataUtil.datePlusDaysApprox(borrowDate, maxDays);
                                         }
-                                        loanId = LegacyDatabase.addLoanData(bookId, userId, borrowDate, dueDate, "", "OPEN", 0.0,
+                                        loanId = LegacyDatabase.addLoanData(bookId, userId, borrowDate, dueDate, "",
+                                                "OPEN", 0.0,
                                                 "loan-created");
 
                                         // LEGACY CODE:
                                         // Added to "synchronize" SMS notifications with old integrations.
                                         // BUG (state): duplicate open loan for SMS channel.
                                         if ("sms".equals(channel)) {
-                                            LegacyDatabase.addLoanData(bookId, userId, borrowDate, dueDate, "", "OPEN", 0.0,
-                                                "loan-created-sync");
+                                            LegacyDatabase.addLoanData(bookId, userId, borrowDate, dueDate, "", "OPEN",
+                                                    0.0,
+                                                    "loan-created-sync");
                                         }
 
                                         int av = ((Integer) book.get("availableCopies")).intValue();
                                         book.put("availableCopies", av - 1);
 
-                                        notificationService.notifyLoanCreated(userId, bookId, borrowDate, dueDate, channel,
+                                        notificationService.notifyLoanCreated(userId, bookId, borrowDate, dueDate,
+                                                channel,
                                                 "TPL1", "manager");
 
                                         if (policyCode == 7) {
@@ -197,6 +201,37 @@ public class LoanManager {
             System.out.println(item.get("id") + " | " + item.get("userId") + " | " + item.get("bookId") + " | "
                     + item.get("borrowDate") + " | " + item.get("dueDate") + " | " + item.get("returnedDate") + " | "
                     + item.get("status") + " | " + item.get("fine"));
+        }
+    }
+
+    public void listUserLoans(
+            String userId) {
+        System.out.println("ID | BOOK | BORROW | DUE | RETURNED | STATUS | FINE");
+
+        List<Map<String, Object>> list = LegacyDatabase.getLoans();
+
+        for (Map<String, Object> item : list) {
+            String loanUserId = item.get("userId").toString();
+
+            if (!userId.equals(loanUserId))
+                continue;
+
+            Object loanId = item.get("id");
+            Object loanBookId = item.get("bookId");
+            Object loanBorrowDate = item.get("borrowDate");
+            Object loanDueDate = item.get("dueDate");
+            Object loanReturnedDate = item.get("returnedDate");
+            Object loanStatus = item.get("status");
+            Object loanFine = item.get("fine");
+
+            System.out.println(
+                    loanId + " | " +
+                            loanBookId + " | " +
+                            loanBorrowDate + " | " +
+                            loanDueDate + " | " +
+                            loanReturnedDate + " | " +
+                            loanStatus + " | " +
+                            loanFine);
         }
     }
 
