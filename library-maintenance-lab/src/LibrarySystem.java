@@ -83,16 +83,15 @@ public class LibrarySystem {
 
     public void handleRegisterBook() {
         try {
-            // duplicate validation style in manager
-            String title = DataUtil.readLine("Title: ");
+             String title = DataUtil.readLine("Title: ");
             String author = DataUtil.readLine("Author: ");
-            int year = DataUtil.askInt("Year: ", 2000);
-            String category = DataUtil.ask("Category: ", "GENERAL");
-            int total = DataUtil.askInt("Total copies: ", 1);
-            int available = DataUtil.askInt("Available copies: ", total);
-            String shelfCode = DataUtil.ask("Shelf code: ", "X0");
-            String isbn = DataUtil.ask("ISBN: ", "NO-ISBN");
-
+            int year = DataUtil.askInt("Year: ", -1);
+            String category = DataUtil.readLine("Category: ");
+            int total = DataUtil.askInt("Total copies: ", -1);
+            int available = DataUtil.askInt("Available copies: ", -1);
+            String shelfCode = DataUtil.readLine("Shelf code: ");
+            String isbn = DataUtil.readLine("ISBN: ");
+        
             int id = bookManager.registerBook(title, author, year, category, total, available, shelfCode, isbn);
             System.out.println("Book registered with id " + id);
 
