@@ -63,44 +63,44 @@ Os estudantes devem melhorar o sistema incrementalmente, simulando manutenção 
 ## Lista dos problemas encontrados:
 
 1. Empréstimos fechados
--A classe ReportGenerator não apresentava o número correto de empréstimos de livros, contando mesmo os empréstimos ainda em aberto.
--Erro do tipo: Bug de cálculo.
+   -A classe ReportGenerator não apresentava o número correto de empréstimos de livros, contando mesmo os empréstimos ainda em aberto.
+   -Erro do tipo: Bug de cálculo.
 
 2. handleRegisterBook()
--O método handleRegisterBook() da classe LibrarySystem apresentava uma parte duplicada, realizando pela segunda vez uma verificaçao já realizada na classe BookManager.
-Erro do tipo: Código duplicado.
+   -O método handleRegisterBook() da classe LibrarySystem apresentava uma parte duplicada, realizando pela segunda vez uma verificaçao já realizada na classe BookManager.
+   Erro do tipo: Código duplicado.
 
 3. countOpenLoansByBook()
--O método da classe LegacyDatabase deveria filtrar por id do livro, mas filtrava pelo id do usuário.
--Erro do tipo: Nomeação de variável errada e lógica inconsistente.
+   -O método da classe LegacyDatabase deveria filtrar por id do livro, mas filtrava pelo id do usuário.
+   -Erro do tipo: Nomeação de variável errada e lógica inconsistente.
 
 4. borrowBook()
--O método borrowBook() realizava várias funções além do necessário, em vez de ser dividido em vários métodos como recomenda as boas práticas de manutençao.
-Erro do tipo: Método longo.
+   -O método borrowBook() realizava várias funções além do necessário, em vez de ser dividido em vários métodos como recomenda as boas práticas de manutençao.
+   Erro do tipo: Método longo.
 
 5. registerUser()
--O Método utiliza muitos parâmetros, tornando-o confuso.
--Erro do tipo: O método aceita uma lista com muitos parâmetros.
+   -O Método utiliza muitos parâmetros, tornando-o confuso.
+   -Erro do tipo: O método aceita uma lista com muitos parâmetros.
 
-6. Classe LibrarySystem 		
--A classe centraliza muitos funções e métodos na mesma classe, como menu, orquestração, entrada de dados, logs.
--Erro do tipo: God Class.
+6. Classe LibrarySystem
+   -A classe centraliza muitos funções e métodos na mesma classe, como menu, orquestração, entrada de dados, logs.
+   -Erro do tipo: God Class.
 
 7. registerBook()
--O método registerBook() da classe BookManager aceita registrar um livro com o nome em branco, contrariando a regra de negócio da biblioteca.
--Erro do tipo: Erro de validação.
+   -O método registerBook() da classe BookManager aceita registrar um livro com o nome em branco, contrariando a regra de negócio da biblioteca.
+   -Erro do tipo: Erro de validação.
 
-8. returnBook() 
--O método returnBook() da classe LoanManager apresenta erros quando o empréstimo é nulo, parando de executar, sem exibir erro e imprimir mensagem no controle. 
--Erro do tipo: Tratamento de erros incosistente.
+8. returnBook()
+   -O método returnBook() da classe LoanManager apresenta erros quando o empréstimo é nulo, parando de executar, sem exibir erro e imprimir mensagem no controle.
+   -Erro do tipo: Tratamento de erros incosistente.
 
 9. startCli()
--O método startCli() da classe LibrarySistem mistura regras de execução, interface do usuário e tratamentos de erros genéricos.
--Erro do tipo: Responsabilidades misturadas.
+   -O método startCli() da classe LibrarySistem mistura regras de execução, interface do usuário e tratamentos de erros genéricos.
+   -Erro do tipo: Responsabilidades misturadas.
 
-10. validateUserData()		
--O método validateUserData() da classe UserManager realiza validações já relizadas ao cadastrar o usuário.
--Erro do tipo: Código duplicado.
+10. validateUserData()
+    -O método validateUserData() da classe UserManager realiza validações já relizadas ao cadastrar o usuário.
+    -Erro do tipo: Código duplicado.
 
 ## Refatorações realizadas:
 
@@ -114,3 +114,4 @@ Erro do tipo: Método longo.
 
 5. registerUser() - Foi criada a classe UserData para passar os parâmetros necessáriso para a execução do método.
 
+## Videos de demonstração de cada parcipante consta na pasta /videos
