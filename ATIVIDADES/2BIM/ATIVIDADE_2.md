@@ -24,7 +24,14 @@ O relatório deve evidenciar o problema em execução, e não apenas apontar o t
 
 Revisar os bugs já cadastrados e simular a etapa de triagem no GitHub Projects.
 
-### 2.1 Rejeição de bugs inválidos
+### 2.1 Classificação do tipo de falha
+
+Para cada issue, identificar se o caso deve ser tratado como:
+
+- `Bug`: erro que já chegou ao usuário e exige manutenção corretiva
+- `Defect`: erro identificado internamente pelo time, antes de chegar ao usuário
+
+### 2.2 Rejeição de bugs inválidos
 
 Antes da classificação, verificar se alguma issue representa um falso bug. Quando aplicável, encerrar a issue com uma das etiquetas abaixo:
 
@@ -33,7 +40,7 @@ Antes da classificação, verificar se alguma issue representa um falso bug. Qua
 - `worksforme`: não foi possível reproduzir o problema
 - `wontfix`: o custo de correção não compensa o impacto
 
-### 2.2 Classificação de severidade
+### 2.3 Classificação de severidade
 
 Para os bugs confirmados, atribuir uma severidade conforme a classificação oficial:
 
@@ -42,7 +49,7 @@ Para os bugs confirmados, atribuir uma severidade conforme a classificação ofi
 - `Normal`: há impacto funcional, mas existe rota de contorno
 - `Trivial`: impacto baixo ou apenas cosmético
 
-### 2.3 Classificação de prioridade
+### 2.4 Classificação de prioridade
 
 Cada bug confirmado também deve receber uma prioridade de correção:
 
@@ -52,7 +59,7 @@ Cada bug confirmado também deve receber uma prioridade de correção:
 
 ## Etapa 3: Ciclo de Vida e Correção
 
-Após a triagem, o bug deve avançar no board até a simulação da correção.
+Após a triagem, deve ser escolhido um bug que ainda não tenha sido corrigido anteriormente para aplicação da correção real no sistema.
 
 ### 3.1 Fluxo no GitHub Projects
 
@@ -62,7 +69,7 @@ Após a triagem, o bug deve avançar no board até a simulação da correção.
 
 ### 3.2 Mensagem de commit
 
-Ao final, registrar a mensagem de commit que seria usada na correção, seguindo o padrão **Conventional Commits**.
+Ao final, registrar a mensagem de commit utilizada na correção, seguindo o padrão **Conventional Commits**.
 
 A mensagem deve obedecer a estas regras:
 
@@ -86,12 +93,12 @@ fix(nome-do-modulo): corrige comportamento do componente X ao carregar a página
 
 ### Evidências
 
-A entrega deve incluir evidências da execução e da triagem, como:
+A entrega deve incluir evidências da execução, da triagem e da correção aplicada, como:
 
 - issues criadas e classificadas
 - labels de severidade e prioridade
 - movimentação dos cards no project
-- comentários com a mensagem de commit simulada
+- comentários com a mensagem de commit da correção
 - logs, screenshots ou outros registros da ocorrência dos bugs
 
 ### Envio por E-mail
