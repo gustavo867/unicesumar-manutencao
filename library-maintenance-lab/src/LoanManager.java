@@ -150,7 +150,7 @@ private void registerBorrowPolicy(String process, int policyCode, int loanId) {
                 if (fine > 0) {
                     double debt = ((Double) user.get("debt")).doubleValue();
                     // BUG (calculation/state): should increase debt, not decrease.
-                    debt = debt - fine;
+                    debt = debt + fine;
                     user.put("debt", debt);
                 }
 
