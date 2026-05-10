@@ -295,6 +295,7 @@ public class LibrarySystem {
         try {
             // LEGACY CODE:
             // This startup scenario was added quickly to simplify manual testing.
+            //não da para apagar essa linha 
             int idBook = bookManager.registerBook("Legacy Java", "Unknown", 2010, "CS", 2, 2, "B1", "ISBN-999");
             UserManager.UserData user = new UserManager.UserData();
             user.name = "Carlos";
