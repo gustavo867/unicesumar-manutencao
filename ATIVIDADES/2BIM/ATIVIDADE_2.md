@@ -129,7 +129,7 @@ Project: https://github.com/seu-usuario/seu-fork/projects/XX
 
 ## Prazo de Entrega
 
-**Data**: 07/05/2026  
+**Data**: 14/05/2026  
 **Horário**: até 19h
 
 ## Checklist de Validação
